@@ -1,0 +1,3 @@
+rootProject.name = 'RateMyPrezi'
+
+include ':app'
