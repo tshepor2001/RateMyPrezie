@@ -24,8 +24,7 @@ build/
 
 # Gradle
 /build/
-/gradle/wrapper/gradle-wrapper.jar
-
+  
 # Buck
 .buckd
 buck-out
