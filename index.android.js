@@ -8,19 +8,39 @@ import React, { Component } from 'react';
 import {
   AppRegistry,
   StyleSheet,
+  View,
   Text,
-  View
+  ScrollView,
+  Navigator,
+  TouchableOpacity,
+  ToolbarAndroid,
+  BackAndroid,
 } from 'react-native';
+
+import { setTheme, MKColor } from 'react-native-material-kit';
+var Cards = require('./app/cards');
+
+
+setTheme({
+  primaryColor: MKColor.Purple,
+  primaryColorRGB: MKColor.RGBPurple,
+  accentColor: MKColor.Amber,
+});
 
 class RateMyPrezi extends Component {
   render() {
     return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to React Native!
-        </Text>
+      <ScrollView style={styles.list}>
+        <TouchableOpacity onPress={() => {
+          this.props.navigator.push({
+            title: 'Cards',
+            component: Cards,
+          });
+        }}>
+          <Cards/>
+        </TouchableOpacity>
 
-      </View>
+      </ScrollView>
     );
   }
 }
