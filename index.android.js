@@ -12,7 +12,7 @@ import {
   BackAndroid,
 } from 'react-native';
 
-import { Card, Button } from 'react-native-material-design';
+import {Toolbar, Card, Button } from 'react-native-material-design';
 class RateMyPrezi extends Component {
   render() {
     const questions = [
@@ -40,10 +40,12 @@ class RateMyPrezi extends Component {
             </Card>
     });
 
-    return (
-      <ScrollView style={styles.list}>
-        {renderedQuestions}
-      </ScrollView>
+    return (<View>
+      <Toolbar title={"Building an app with react native"} style={styles.toolbar}/>
+          <ScrollView style={styles.list}>
+            {renderedQuestions}
+          </ScrollView>
+      </View>
     );
   }
 }
@@ -65,6 +67,10 @@ const styles = StyleSheet.create({
     color: '#333333',
     marginBottom: 5,
   },
+    list:{
+        marginTop:60
+    }
+  
 });
 
 AppRegistry.registerComponent('RateMyPrezi', () => RateMyPrezi);
