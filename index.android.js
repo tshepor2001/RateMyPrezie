@@ -1,8 +1,3 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- * @flow
- */
 
 import React, { Component } from 'react';
 import {
@@ -17,29 +12,37 @@ import {
   BackAndroid,
 } from 'react-native';
 
-import { setTheme, MKColor } from 'react-native-material-kit';
-var Cards = require('./app/cards');
-
-
-setTheme({
-  primaryColor: MKColor.Purple,
-  primaryColorRGB: MKColor.RGBPurple,
-  accentColor: MKColor.Amber,
-});
-
+import { Card, Button } from 'react-native-material-design';
 class RateMyPrezi extends Component {
   render() {
+    const questions = [
+      {
+        questionId:"0122",
+        title: "STYLE OF DELIVERY",
+        description: "Did the speaker use clear accesible language ?"
+      },
+      {
+        questionId:"0123",
+        title: "PRESENTATION LENGTH",
+        description: "Was the presentation an appropriate length ?"
+      }
+
+    ]
+    const renderedQuestions = questions.map((question)=>{
+      return <Card key={question.questionId}>
+                <Card.Body>
+                    <Text> {question.description} </Text>
+                </Card.Body>
+                <Card.Actions position="right">
+                    <Button value="ACTION" text={"Rate"}/>
+                </Card.Actions>
+                    
+            </Card>
+    });
+
     return (
       <ScrollView style={styles.list}>
-        <TouchableOpacity onPress={() => {
-          this.props.navigator.push({
-            title: 'Cards',
-            component: Cards,
-          });
-        }}>
-          <Cards/>
-        </TouchableOpacity>
-
+        {renderedQuestions}
       </ScrollView>
     );
   }
