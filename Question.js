@@ -20,17 +20,24 @@ export default class Question extends Component {
             onForward: PropTypes.func.isRequired,
             onBack: PropTypes.func.isRequired
         }
+    viewQuestionDetails(question){
+        this.props.onForward(question)
+    }
+    
     render(){
         const questions = [
           {
             questionId:"0122",
             title: "STYLE OF DELIVERY",
-            description: "Did the speaker use clear accesible language ?"
+            description: "Did the speaker use clear accesible language ?",
+            subQuestions:[ ]
+
           },
           {
             questionId:"0123",
             title: "PRESENTATION LENGTH",
-            description: "Was the presentation an appropriate length ?"
+            description: "Was the presentation an appropriate length ?",
+            subQuestions:[ ]
           }
 
         ]
@@ -40,9 +47,7 @@ export default class Question extends Component {
                         <Text> {question.description} </Text>
                     </Card.Body>
                     <Card.Actions position="right">
-                     <TouchableHighlight onPress={this.props.onForward}>
-                        <Text> Rate </Text>
-                     </TouchableHighlight>
+                        <Button value="Rate" onPress={this.viewQuestionDetails.bind(this, question)} text={"Rate"}/>
                     </Card.Actions>
                         
                 </Card>

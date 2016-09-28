@@ -15,13 +15,14 @@ import Question from './Question';
 
 class RateMyPrezi extends Component {
   render() {
-      return (<Navigator initialRoute={{ title: 'My initial Scene', index:0}}
+      return (<Navigator initialRoute={{ title: 'Building a React native app', index:0}}
               renderScene={(route, navigator) => { 
-                return  <Question onForward={()=> {
+                return  <Question onForward={(question)=> {
                     const nextIndex = route.index + 1;
                     navigator.push({
-                        title: 'Scene' + nextIndex,
+                        title: question.title,
                         index: nextIndex,
+                        question
                     });
                 }} onBack = { () => {
                     if( route.index > 0) {
