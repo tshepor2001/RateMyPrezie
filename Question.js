@@ -17,51 +17,53 @@ import {Toolbar, Card, Button, Icon } from 'react-native-material-design';
 export default class Question extends Component {
     static propTypes = {
             title: PropTypes.string.isRequired,
-            onForward: PropTypes.func.isRequired,
-            onBack: PropTypes.func.isRequired
+            onBack: PropTypes.func.isRequired,
+            presentation: PropTypes.object.isRequired,
         }
-    viewQuestionDetails(question){
-        this.props.onForward(question)
-    }
-    
     render(){
-        const questions = [
-          {
-            questionId:"0122",
-            title: "STYLE OF DELIVERY",
-            description: "Did the speaker use clear accesible language ?",
-            subQuestions:[ ]
 
-          },
-          {
-            questionId:"0123",
-            title: "PRESENTATION LENGTH",
-            description: "Was the presentation an appropriate length ?",
-            subQuestions:[ ]
-          }
-
-        ]
-        const renderedQuestions = questions.map((question)=>{
-          return <Card key={question.questionId}>
+        const renderedQuestions = this.props.presentation.questions.map((question)=>{
+          return <Card key={question.id}>
                     <Card.Body>
+                        <Text style={styles.cardHeader}> {question.title} </Text>
                         <Text> {question.description} </Text>
                     </Card.Body>
                     <Card.Actions position="right">
-                        <Button value="Rate" onPress={this.viewQuestionDetails.bind(this, question)} text={"Rate"}/>
+                     <TouchableHighlight onPress={this._addItem}>
+                        <Text> Rate </Text>
+                     </TouchableHighlight>
                     </Card.Actions>
-                        
+
                 </Card>
         });
 
-    const toolBarIcon = this.props.index!=0 ? "arrow-back": "menu";
     return (<View>
-      <Toolbar title={this.props.title} onIconPress={this.props.onBack} icon={toolBarIcon} style={styles.toolbar}/>
+      <Toolbar title={this.props.title} onIconPress={this.props.onBack} icon={'arrow-back'} style={styles.toolbar}/>
           <ScrollView style={styles.list}>
             {renderedQuestions}
           </ScrollView>
       </View>
  )
     }
+
+    _addItem() {
+  Alert.alert(
+    'Add New Item',
+    null,
+    [
+      {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
+      {
+        text: 'Add',
+        onPress: (text) => {
+          this.itemsRef.push({ title: text })
+        }
+      },
+    ],
+    'plain-text'
+  );
+}
+
+
  }
 
 const styles = StyleSheet.create({
@@ -83,7 +85,10 @@ const styles = StyleSheet.create({
   },
     list:{
         marginTop:60
-    }
-  
-});
+    },
+    cardHeader: {
+      fontSize: 18,
+      color: '#0387D1',
+    },
 
+});
