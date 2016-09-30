@@ -11,8 +11,7 @@ import {
   ToolbarAndroid,
   BackAndroid,
 } from 'react-native';
-import Presentation from './Presentation';
-import Question from './Question';
+import ViewHolder from './components/ViewHolder';
 
 class RateMyPrezi extends Component {
 
@@ -22,38 +21,27 @@ class RateMyPrezi extends Component {
   render() {
       return (
         <Navigator
-          initialRoute = {{ title: 'Building a React native app', id:0}}
+          initialRoute = {{presentation:{}, title: 'Building a React native app', index:0}}
           renderScene = {this.renderScene}/>
       );
   }
-  _presentation = {}
   renderScene(route, navigator) {
 
-    switch (route.id) {
-      case 0:
-        return <Presentation onForward={(presentation)=> {
-          route.id++;
-          _presentation = presentation;
+return <ViewHolder onForward={(presentation)=> {
+          let index = route.index ;
           navigator.push({
-            title: presentation.title,
-            index: 1
+            title: presentation.title + index,
+            index: index + 1,
+            presentation : presentation
           });
+              
         }}
-          index={route.id}
+        onBack={()=>{
+            navigator.pop();
+        }}
+          presentation={route.presentation}
+          index={route.index}
           title={route.title}/>
-          case 1:
-            return <Question onBack={ () => {
-              // if( route.index > 0) {
-                navigator.pop();
-              // }
-              route.id--;
-            }}
-              index={route.id}
-              title={_presentation.title}
-              presentation={_presentation}/>
-      default:
-
-    }
   }
 }
 

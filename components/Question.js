@@ -10,6 +10,7 @@ import {
   ToolbarAndroid,
   TouchableHighlight,
   BackAndroid,
+  Alert
 } from 'react-native';
 
 import {Toolbar, Card, Button, Icon } from 'react-native-material-design';

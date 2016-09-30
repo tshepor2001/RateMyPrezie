@@ -12,9 +12,9 @@ import {
   BackAndroid,
   ListView
 } from 'react-native';
-
+import Question from './Question';
 import {Toolbar, Card, Button, Icon } from 'react-native-material-design';
-const ListItem = require('./components/ListItem');
+const ListItem = require('./ListItem');
 const firebase = require('firebase');
 
 const firebaseConfig = {
@@ -89,19 +89,27 @@ export default class Presentation extends Component {
   }
 
     render(){
+     console.log(this.props.index)
+     switch(this.props.index){
+         case 0:
+               return <View>
+                   <Toolbar title={this.props.title} 
+                       onIconPress={this.props.onBack} 
+                       icon={"menu"} style={styles.toolbar}/>
+                           <ListView
+                           dataSource={this.state.dataSource}
+                       renderRow={this._renderItem.bind(this)}
+                       enableEmptySections={true}
+                       style={styles.list}/>
 
-    return (
-      <View>
-        <Toolbar title={this.props.title} onIconPress={this.props.onBack} icon={"menu"} style={styles.toolbar}/>
-        <ListView
-          dataSource={this.state.dataSource}
-          renderRow={this._renderItem.bind(this)}
-          enableEmptySections={true}
-          style={styles.list}/>
-
-
-      </View>
- )
+                   </View>
+         case 1:
+             return <Question presentation={this.props.presentation}
+                             title={this.props.presentation.title} 
+                             onBack={this.props.onBack}/>
+         default:
+              return <Text> Something went wrong</Text>
+     }
     }
  }
 
