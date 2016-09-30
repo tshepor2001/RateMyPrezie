@@ -89,9 +89,6 @@ export default class Presentation extends Component {
   }
 
     render(){
-     console.log(this.props.index)
-     switch(this.props.index){
-         case 0:
                return <View>
                    <Toolbar title={this.props.title} 
                        onIconPress={this.props.onBack} 
@@ -103,13 +100,6 @@ export default class Presentation extends Component {
                        style={styles.list}/>
 
                    </View>
-         case 1:
-             return <Question presentation={this.props.presentation}
-                             title={this.props.presentation.title} 
-                             onBack={this.props.onBack}/>
-         default:
-              return <Text> Something went wrong</Text>
-     }
     }
  }
 
