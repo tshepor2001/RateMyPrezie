@@ -18,7 +18,7 @@ const ListItem = require('./ListItem');
 const firebase = require('firebase');
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDGWzI6bz65MfQAA-z7UXoujkMb65S8oUY",
+
   authDomain: "ratemyprezie.firebaseapp.com",
   databaseURL: "https://ratemyprezie.firebaseio.com",
   storageBucket: "",
@@ -90,8 +90,8 @@ export default class Presentation extends Component {
 
     render(){
                return <View>
-                   <Toolbar title={this.props.title} 
-                       onIconPress={this.props.onBack} 
+                   <Toolbar title={this.props.title}
+                       onIconPress={this.props.onBack}
                        icon={"menu"} style={styles.toolbar}/>
                            <ListView
                            dataSource={this.state.dataSource}
